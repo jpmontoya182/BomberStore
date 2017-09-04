@@ -15,7 +15,8 @@ export class AppComponent implements OnInit {
     public identity;
 
     constructor(
-      private _userService : UserService
+      private _userService : UserService,
+      private _router : Router
     ){
       this.user = new User('','','','','','ROLE_USER','null');
     }
@@ -29,14 +30,14 @@ export class AppComponent implements OnInit {
       // autenticacion
       this._userService.singup(this.user).subscribe(
         response => {
-          let identity = response.user;
+          let identity = response.username;
           this.identity = identity;
 
-          if(!this.identity.username){
+          if(!this.identity){
             console.log('el usuario no esta autenticado')
           }else{
              // Crear el locasstorage 
-          localStorage.setItem('identity', JSON.stringify(identity));
+          localStorage.setItem('identity', JSON.stringify(response));
             // Obtener el token
             this._userService.singup(this.user, true).subscribe(
               response => {
@@ -65,11 +66,32 @@ export class AppComponent implements OnInit {
           var errorM = <any>error;
           if (errorM != null) {  
             console.log('Error en 2:' + errorM);          
-            var body = JSON.parse(error._body);
-           
+            var body = JSON.parse(error._body);           
             // this.errorMenssage = body.message;
           } 
         }
       );
     }
+
+  public getIdentity(){
+    let identity = JSON.parse(localStorage.getItem('identity'));
+    if (identity != 'undefined') {
+        this.identity = identity; 
+    } else {
+        this.identity = null;
+    }
+    return this.identity;
+  }
+
+
+
+  public logOut(){
+    localStorage.removeItem('token');
+    localStorage.removeItem('identity');   
+    localStorage.clear();
+    this.identity = null;
+    this.token = null;
+    this.user =  new User('','','','','','ROLE_USER','null');
+    this._router.navigate(['/']); 
+  }
 }

@@ -5,7 +5,7 @@ var secret = 'RasBerryPi3162';
 // metodo para validar si esta autenticado
 exports.ensureAuth = function(req, res, next){
     // valida si tiene la autorizacion
-    if (req.body.authorization) {
+    if (!req.headers.authorization) {
         return res.status(403).send({message : 'La petición no tiene el header de autorización'});        
     } 
     // se obtiene el toke
@@ -23,6 +23,5 @@ exports.ensureAuth = function(req, res, next){
         return res.status(404).send({message : 'Token no valido'})
     }    
     req.user = payload;
-
-    next;
+    next();
 }

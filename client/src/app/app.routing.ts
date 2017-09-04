@@ -1,15 +1,13 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule  } from '@angular/router';
 
-import { HomeComponent } from './components/home.component';
-import { InventarioComponent } from "./components/inventario.component";
+import { HomeComponent } from './components/home/home.component';
+import { CategoryListComponent } from './components/category-list/category-list.component';
 
 const appRoutes : Routes = [
-    // home
-    {path : '', component : HomeComponent },
-    // inventario
-    {path : 'inventario', component: InventarioComponent}
-
+    { path : '', component: HomeComponent }, 
+    // categorias
+    { path : 'categories/:page', component: CategoryListComponent }
 ];
 
 export const appRoutingProviders : any[] = [];

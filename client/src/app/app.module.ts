@@ -9,15 +9,21 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 import { appRoutingProviders, routing } from './app.routing';
+import { CategoryAddComponent } from './components/category-add/category-add.component';
+import { CategoryEditComponent } from './components/category-edit/category-edit.component';
+import { CategoryListComponent } from './components/category-list/category-list.component';
+import { HomeComponent } from './components/home/home.component';
 
-import { HomeComponent } from './components/home.component';
-import { InventarioComponent } from './components/inventario.component';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    InventarioComponent
+    CategoryAddComponent,
+    CategoryEditComponent,
+    CategoryListComponent,
+    HomeComponent    
   ],
   imports: [
     BrowserModule, 

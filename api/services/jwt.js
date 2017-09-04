@@ -1,6 +1,6 @@
 var jwt = require('jwt-simple');
 var moment = require('moment');
-var secret = '900De2017';
+var secret = 'RasBerryPi3162';
 
 exports.createToken = function(user){
     var payload = {
